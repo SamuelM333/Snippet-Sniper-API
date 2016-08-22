@@ -7,6 +7,8 @@
 - [ ] Encryption
 - [ ] Create GitBook
 - [ ] Expose API only to HTTPS (SSL)
+- [ ] Make models
+- [ ] Try mLab
     
 ## Sinppet structure
 
@@ -14,3 +16,23 @@
 - Code
 - Explication and links on Markdown
 - Comments
+
+## Models structure
+
+- User
+    - name
+    - lastname
+    - email
+    - password
+    - date joined
+    - last online
+    - tokens
+- Snippet
+    - user
+    - title
+    - code
+    - description
+    - comments
+        - user
+        - text
+    - scope
