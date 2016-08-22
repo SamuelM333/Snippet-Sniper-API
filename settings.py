@@ -54,43 +54,7 @@ user = {
             'type': 'string',
             'allowed': ["user", "admin", "superuser"],
             'required': True,
-        },
-        'coupon': {
-            'type': 'dict',
-            'schema': {
-                'percentage': {'type': 'number'},
-                'date_assigned': {'type': 'datetime'},
-                'date_used': {'type': 'datetime'},
-                'used': {'type': 'boolean'}
-            }
-        },
-        'buy_list': {'type': 'list', 'schema': {'type': 'objectid'}},
-        'pantry': {
-            'type': 'list',
-            'schema': {
-                'type': 'dict',
-                'schema': {
-                    'pantry_name': {'type': 'string'},
-                    'articles': {
-                        'type': 'list',
-                        'schema': {
-                            'type': 'dict',
-                            'schema': {
-                                'article_name': {'type': 'string'},
-                                'quantity': {'type': 'number'}
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        'location': {
-            'type': 'dict',
-            'schema': {
-                'address': {'type': 'string'},
-                'city': {'type': 'string'}
-            },
-        },
+        }
     }
 }
 
