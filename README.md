@@ -1,10 +1,10 @@
-# API Test
+# Snippet sniper API 
 
 ## To do
 
 - [x] ~~Add a licence~~
-- [ ] Implement OAuth
-- [ ] Care about encryption
+- [ ] Implement OAuth2
+- [ ] Encryption
 - [ ] Create GitBook
 - [ ] Expose API only to HTTPS (SSL)
     
