@@ -7,33 +7,29 @@
 - [ ] Encryption
 - [ ] Create GitBook
 - [ ] Expose API only to HTTPS (SSL)
-- [ ] Make models
+- [x] Make models
 - [ ] Try mLab
     
-## Sinppet structure
+## Snippet structure
 
 - Title
 - Body
-    - Code
-    - Markdown
-- Comments
+    - Fragments
+        - Language
+        - Code
 
 ## Models structure
 
 - User
     - name
-    - lastname
+    - last name
     - email
     - password
     - date joined
     - last online
     - tokens
 - Snippet
-    - user
+    - owner
     - title
-    - code
-    - description
-    - comments
-        - user
-        - text
-    - scope
+    - body
+    - created
