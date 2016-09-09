@@ -13,8 +13,9 @@
 ## Sinppet structure
 
 - Title
-- Code
-- Explication and links on Markdown
+- Body
+    - Code
+    - Markdown
 - Comments
 
 ## Models structure
