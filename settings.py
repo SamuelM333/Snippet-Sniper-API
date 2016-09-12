@@ -70,7 +70,7 @@ snippet = {
     'cache_control': '',
     'cache_expires': 0,
     'resource_methods': ['GET', 'POST'],
-    'item_methods': ['GET', 'PATCH'],
+    'item_methods': ['GET', 'PATCH', 'PUT'],
     'schema': {
         'title': {
             'type': 'string',
