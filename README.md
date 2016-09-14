@@ -5,6 +5,7 @@
 - [x] ~~Add a licence~~
 - [ ] Implement OAuth2
 - [ ] Encryption
+- [ ] Validate fields
 - [ ] Create GitBook
 - [ ] Expose API only to HTTPS (SSL)
 - [x] Make models
