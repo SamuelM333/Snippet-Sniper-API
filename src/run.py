@@ -8,6 +8,7 @@ host = '0.0.0.0'
 SETTINGS = {
     'DOMAIN': DOMAIN,
     'X_DOMAINS': '*',
+    'X_HEADERS': '*'
 }
 
 app = Eve(settings=SETTINGS)
