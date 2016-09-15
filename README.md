@@ -9,7 +9,6 @@
 - [ ] Create GitBook
 - [ ] Expose API only to HTTPS (SSL)
 - [x] Make models
-- [ ] Try mLab
     
 ## Snippet structure
 
