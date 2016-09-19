@@ -1,4 +1,18 @@
 from sys import maxsize
+from bcrypt import hashpw
+from eve.auth import BasicAuth
+from flask import current_app as app
+
+
+class BCryptAuth(BasicAuth):
+    def check_auth(self, email, password, allowed_roles, resource, method):
+        # use Eve's own db driver; no additional connections/resources are used
+        users = app.data.driver.db['user']
+        logging_user = users.find_one({'email': email})
+        if logging_user and '_id' in logging_user:
+            self.set_request_auth_value(logging_user['_id'])
+        return user and hashpw(password, logging_user['password']) == logging_user['password']
+
 
 MONGO_HOST = 'localhost'
 MONGO_PORT = 27017
@@ -24,6 +38,7 @@ user = {
     'cache_expires': 0,
     'item_methods': ['GET', 'PATCH', 'PUT'],
     'resource_methods': ['POST'],
+    'authentication': BCryptAuth,
     'additional_lookup': {
         'url': 'regex("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+")',
         'field': 'email'
