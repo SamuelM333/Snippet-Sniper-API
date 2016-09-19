@@ -1,4 +1,5 @@
-from sys import maxsize
+# -*- coding: utf-8 -*-
+
 from bcrypt import hashpw
 from eve.auth import BasicAuth
 from flask import current_app as app
@@ -6,7 +7,6 @@ from flask import current_app as app
 
 class BCryptAuth(BasicAuth):
     def check_auth(self, email, password, allowed_roles, resource, method):
-        # use Eve's own db driver; no additional connections/resources are used
         users = app.data.driver.db['user']
         logging_user = users.find_one({'email': email})
         if logging_user and '_id' in logging_user:
@@ -14,22 +14,20 @@ class BCryptAuth(BasicAuth):
         return user and hashpw(password, logging_user['password']) == logging_user['password']
 
 
+def pre_get_users(request, lookup):
+    email = app.auth.get_request_auth_value()
+    print(email)
+    # only return user with current username
+    lookup["email"] = email
+
+
 MONGO_HOST = 'localhost'
 MONGO_PORT = 27017
-
-# Skip these if your db has no auth. But it really should.
 # MONGO_USERNAME = '<your username>'
 # MONGO_PASSWORD = '<your password>'
-
 MONGO_DBNAME = 'snippet_sniper'
 
-# Enable reads (GET), inserts (POST) and DELETE for resources/collections
-# (if you omit this line, the API will default to ['GET'] and provide
-# read-only access to the endpoint).
 RESOURCE_METHODS = ['GET', 'POST', 'DELETE']
-
-# Enable reads (GET), edits (PATCH) and deletes of
-# individual items  (defaults to read-only item access).
 ITEM_METHODS = ['GET', 'PATCH', 'DELETE']
 
 user = {
@@ -37,15 +35,14 @@ user = {
     'cache_control': '',
     'cache_expires': 0,
     'item_methods': ['GET', 'PATCH', 'PUT'],
-    'resource_methods': ['POST'],
+    'resource_methods': ['GET', 'POST'],
     'authentication': BCryptAuth,
+    'auth_field': 'user_id',
     'additional_lookup': {
         'url': 'regex("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+")',
         'field': 'email'
     },
     'schema': {
-        # Schema definition, based on Cerberus grammar. Check the Cerberus project
-        # (https://github.com/nicolaiarocci/cerberus) for details.
         'first_name': {
             'type': 'string',
             'minlength': 1,
@@ -85,7 +82,6 @@ snippet = {
     'cache_expires': 0,
     'resource_methods': ['GET', 'POST'],
     'item_methods': ['GET', 'PATCH', 'PUT'],
-    'authentication': None,
     'schema': {
         'title': {
             'type': 'string',
@@ -103,16 +99,12 @@ snippet = {
                 }
             },
             'minlength': 1,
-            'maxlength': maxsize,  # ?
+            'maxlength': 128,
             'required': True
         },
         'owner': {
             'type': 'objectid',
             'required': True,
-            # referential integrity constraint: value must exist in the
-            # 'people' collection. Since we aren't declaring a 'field' key,
-            # will default to `people._id` (or, more precisely, to whatever
-            # ID_FIELD value is).
             'data_relation': {
                 'resource': 'user',
                 # make the owner embeddable with ?embedded={"owner":1}
