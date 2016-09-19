@@ -31,7 +31,6 @@ user = {
     'schema': {
         # Schema definition, based on Cerberus grammar. Check the Cerberus project
         # (https://github.com/nicolaiarocci/cerberus) for details.
-
         'first_name': {
             'type': 'string',
             'minlength': 1,
@@ -42,9 +41,8 @@ user = {
             'type': 'string',
             'minlength': 1,
             'maxlength': 120,
-            'required': True,
         },
-        'email': {
+        'email': {  # Validate
             'type': 'string',
             'minlength': 8,
             'maxlength': 120,
@@ -71,6 +69,7 @@ snippet = {
     'cache_expires': 0,
     'resource_methods': ['GET', 'POST'],
     'item_methods': ['GET', 'PATCH', 'PUT'],
+    'authentication': None,
     'schema': {
         'title': {
             'type': 'string',
@@ -111,4 +110,11 @@ snippet = {
 DOMAIN = {
     'user': user,
     'snippet': snippet,
+}
+
+SETTINGS = {
+    'DOMAIN': DOMAIN,
+    'X_DOMAINS': '*',
+    'X_HEADERS': '*',
+    'XML': False
 }
