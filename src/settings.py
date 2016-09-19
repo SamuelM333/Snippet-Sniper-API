@@ -22,8 +22,8 @@ user = {
     'item_title': 'user',
     'cache_control': '',
     'cache_expires': 0,
-    'item_methods': ['GET', 'PATCH'],
-    'resource_methods': ['GET', 'POST'],
+    'item_methods': ['GET', 'PATCH', 'PUT'],
+    'resource_methods': ['POST'],
     'additional_lookup': {
         'url': 'regex("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+")',
         'field': 'email'
@@ -42,12 +42,13 @@ user = {
             'minlength': 1,
             'maxlength': 120,
         },
-        'email': {  # Validate
+        'email': {
             'type': 'string',
             'minlength': 8,
             'maxlength': 120,
             'required': True,
             'unique': True,
+            'regex': "[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+"
         },
         'password': {
             'type': 'string',
@@ -107,13 +108,11 @@ snippet = {
     }
 }
 
-DOMAIN = {
-    'user': user,
-    'snippet': snippet,
-}
-
 SETTINGS = {
-    'DOMAIN': DOMAIN,
+    'DOMAIN': {
+        'user': user,
+        'snippet': snippet,
+    },
     'X_DOMAINS': '*',
     'X_HEADERS': '*',
     'XML': False
