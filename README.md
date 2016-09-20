@@ -4,8 +4,10 @@
 
 - [x] ~~Add a licence~~
 - [ ] Implement OAuth2
-- [ ] Encryption
+- [x] ~~Encryption~~
+- [ ] Secure endpoints
 - [ ] Validate fields
+- [ ] Add slugs to snippets
 - [ ] Create GitBook
 - [ ] Expose API only to HTTPS (SSL)
 - [x] Make models
