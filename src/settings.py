@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from auth import BCryptAuth
+from auth import BCryptAuthUser, BCryptAuthSnippet
 
 MONGO_HOST = 'localhost'
 MONGO_PORT = 27017
@@ -14,10 +14,11 @@ user = {
     'item_title': 'user',
     'cache_control': '',
     'cache_expires': 0,
-    'item_methods': ['GET', 'PATCH', 'PUT'],
     'resource_methods': ['GET', 'POST'],
-    'allowed_roles': ['superuser', 'admin'],
-    'authentication': BCryptAuth,
+    'public_methods': ['POST'],
+    'item_methods': ['GET', 'PATCH', 'PUT'],
+    'public_item_methods': ['GET'],
+    'authentication': BCryptAuthUser,
     'additional_lookup': {
         'url': 'regex("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+")',
         'field': 'email'
@@ -51,7 +52,7 @@ user = {
         'role': {
             'type': 'string',
             'allowed': ['user', 'superuser', 'admin'],
-            'required': True,  # Use default?
+            'required': True,  # Use default
         }
     }
 }
@@ -61,7 +62,10 @@ snippet = {
     'cache_control': '',
     'cache_expires': 0,
     'resource_methods': ['GET', 'POST'],
+    'public_methods': ['POST'],
     'item_methods': ['GET', 'PATCH', 'PUT'],
+    'public_item_methods': ['GET'],
+    'authentication': BCryptAuthSnippet,
     'schema': {
         'title': {
             'type': 'string',
@@ -74,7 +78,7 @@ snippet = {
             'schema': {
                 'type': 'dict',
                 'schema': {
-                    'language': {'type': 'string'},  # Choices
+                    'language': {'type': 'string'},  # Add language choices
                     'body': {'type': 'string'}
                 }
             },
@@ -91,7 +95,17 @@ snippet = {
                 'embeddable': True
             },
         },
-        'created': {'type': 'datetime'}
+        'allowed': {
+            # Emails of other users
+            'type': 'list',
+            'schema': {
+                'type': 'string',
+                'minlength': 8,
+                'maxlength': 120,
+                'unique': True,
+                'regex': "[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+"
+            }
+        },
     }
 }
 
