@@ -62,14 +62,14 @@ snippet = {
     'cache_control': '',
     'cache_expires': 0,
     'resource_methods': ['GET', 'POST'],
-    'public_methods': ['POST'],
+    'public_methods': ['POST', 'GET'],
     'item_methods': ['GET', 'PATCH', 'PUT'],
     'public_item_methods': ['GET'],
     'authentication': BCryptAuthSnippet,
     'schema': {
         'title': {
             'type': 'string',
-            'minlength': 5,
+            'minlength': 1,
             'maxlength': 60,
             'required': True
         },
