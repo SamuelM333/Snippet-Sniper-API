@@ -97,6 +97,9 @@ snippet = {
         },
         'allowed': {
             # Emails of other users
+            # Public snippet: Empty
+            # Private snippet: Only owner's email
+            # Restricted snippet: Owner and others's email
             'type': 'list',
             'schema': {
                 'type': 'string',
