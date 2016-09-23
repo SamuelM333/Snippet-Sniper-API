@@ -63,7 +63,7 @@ snippet = {
     'cache_expires': 0,
     'resource_methods': ['GET', 'POST'],
     'public_methods': ['POST', 'GET'],
-    'item_methods': ['GET', 'PATCH', 'PUT'],
+    'item_methods': ['GET', 'PATCH', 'PUT', 'DELETE'],
     'public_item_methods': ['GET'],
     'authentication': BCryptAuthSnippet,
     'schema': {
@@ -73,7 +73,7 @@ snippet = {
             'maxlength': 60,
             'required': True
         },
-        'body': {
+        'fragments': {
             'type': 'list',
             'schema': {
                 'type': 'dict',
@@ -83,7 +83,7 @@ snippet = {
                 }
             },
             'minlength': 1,
-            'maxlength': 128,
+            'maxlength': 12800,
             'required': True
         },
         'owner': {
@@ -95,7 +95,7 @@ snippet = {
                 'embeddable': True
             },
         },
-        'allowed': {
+        'allowed_users': {
             # Emails of other users
             # Public snippet: Empty
             # Private snippet: Only owner's email
