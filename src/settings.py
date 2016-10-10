@@ -119,6 +119,6 @@ SETTINGS = {
     },
     'X_DOMAINS': '*',
     'X_HEADERS': '*',
-    'MONGO_DBNAME' = 'snippet_sniper',
+    'MONGO_DBNAME': 'snippet_sniper',
     'XML': False
 }
