@@ -12,6 +12,7 @@
 - [ ] Expose API only to HTTPS (SSL)
 - [x] Make models
 - [ ] Get available code languages
+- [ ] Check out [Eve Genie] (https://github.com/drud/evegenie)
     
 ## Snippet structure
 
